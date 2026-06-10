@@ -1188,6 +1188,72 @@
       .villa-name { font-size: 56px; }
       .servicii-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ════════════════════════════════════════════════
+       HERO LOAD ANIMATIONS
+    ════════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(28px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .navbar {
+      animation: fadeIn 0.8s ease both;
+    }
+
+    .title-wrap {
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .desc {
+      animation: fadeLeft 1s ease 0.7s both;
+    }
+
+    .credit {
+      animation: fadeIn 1s ease 1s both;
+    }
+
+    .coords {
+      animation: fadeIn 1s ease 0.5s both;
+    }
+
+    /* ════════════════════════════════════════════════
+       SCROLL ANIMATIONS
+    ════════════════════════════════════════════════ */
+    [data-anim] {
+      opacity: 0;
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    [data-anim="up"]    { transform: translateY(40px); }
+    [data-anim="left"]  { transform: translateX(-40px); }
+    [data-anim="right"] { transform: translateX(40px); }
+    [data-anim="scale"] { transform: scale(0.96); }
+    [data-anim="fade"]  { transform: none; }
+
+    [data-anim].in-view {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-anim], .navbar, .title-wrap, .desc, .credit, .coords {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1239,38 +1305,38 @@
 
     <!-- ── ABOUT ───────────────────────────────────── -->
     <section class="about">
-      <div class="about-photo">
+      <div class="about-photo" data-anim="left">
         <img src="hero4.webp" alt="Maya Villas" />
       </div>
       <div class="about-body">
-        <span class="section-label">Despre Noi</span>
+        <span class="section-label" data-anim="up">Despre Noi</span>
 
         <div class="about-group">
-          <h2 class="about-heading">
+          <h2 class="about-heading" data-anim="up" data-delay="100">
             Vile private complet echipate, terase exterioare, living cu bar și vedere directă spre lac. Disponibile pentru sejururi private, team building-uri, conferințe, nunți și orice moment care merită să fie sărbătorit.
           </h2>
 
-          <div class="about-stats">
+          <div class="about-stats" data-anim="up" data-delay="200">
             <span class="stat-pill">3 Vile Private</span>
             <span class="stat-pill">Lac Natural</span>
             <span class="stat-pill">Natură Neatinsă</span>
             <span class="stat-pill">Vedere Panoramică</span>
           </div>
 
-          <div class="about-location">
+          <div class="about-location" data-anim="up" data-delay="300">
             [Locația Noastră &nbsp;/&nbsp; <span>Curchi, Moldova</span>]
           </div>
         </div>
 
-        <a href="#" class="btn-primary">Rezervă acum &nbsp;→</a>
+        <a href="#" class="btn-primary" data-anim="up" data-delay="400">Rezervă acum &nbsp;→</a>
       </div>
     </section>
 
     <!-- ── CAZARE ───────────────────────────────────── -->
     <section class="cazare">
       <div class="cazare-header">
-        <h2 class="cazare-title">Cazare.</h2>
-        <p class="cazare-desc">
+        <h2 class="cazare-title" data-anim="up">Cazare.</h2>
+        <p class="cazare-desc" data-anim="up" data-delay="150">
           Vile construite din piatră locală și lemn masiv, cu ferestre largi spre lac și pădure. Fiecare spațiu e gândit pentru confort autentic și liniște deplină.
         </p>
       </div>
@@ -1279,11 +1345,11 @@
 
         <!-- stânga: poză sus, text jos -->
         <div class="cazare-left">
-          <div class="cazare-photo-2">
+          <div class="cazare-photo-2" data-anim="up">
             <img src="terrace.webp" alt="Terasă privată" />
           </div>
           <span class="cazare-photo-label">Terasă privată</span>
-          <div class="cazare-left-text">
+          <div class="cazare-left-text" data-anim="up" data-delay="200">
             <h3>Spații gândite pentru confort autentic</h3>
             <p>Fiecare vilă include dormitor cu vedere la lac, living cu bar privat, baie din travertin natural și terasă privată cu masă exterioară. Piatră locală, lemn masiv, lumină naturală.</p>
           </div>
@@ -1291,7 +1357,7 @@
 
         <!-- dreapta: poză înaltă sus -->
         <div class="cazare-right">
-          <div class="cazare-photo-1">
+          <div class="cazare-photo-1" data-anim="up" data-delay="100">
             <img src="view_from_room.webp" alt="Dormitor cu vedere la lac" />
           </div>
           <span class="cazare-photo-label" style="margin-top:14px;">Dormitor · vedere la lac</span>
@@ -1303,7 +1369,7 @@
       <div class="cazare-extra">
 
         <!-- dormitor — înalt -->
-        <div class="cazare-extra-item cazare-extra-item--tall">
+        <div class="cazare-extra-item cazare-extra-item--tall" data-anim="up">
           <div class="cazare-extra-img">
             <img src="room%20copy.webp" alt="Dormitor" />
           </div>
@@ -1311,7 +1377,7 @@
         </div>
 
         <!-- dreapta: info vilă -->
-        <div class="villa-info">
+        <div class="villa-info" data-anim="right">
           <span class="villa-info-label">Vilele noastre</span>
 
           <div class="villa-info-rows">
@@ -1342,7 +1408,7 @@
 
     <!-- ── PRIVATE DINNERS ───────────────────────────── -->
     <section class="private-dinners" id="dinners">
-      <div class="private-dinners-content">
+      <div class="private-dinners-content" data-anim="left">
         <span class="section-label" style="color:rgba(255,255,255,.45); margin-bottom:8px;">Experiențe exclusive</span>
         <h2 class="private-dinners-title">Private<br>Dinners.</h2>
         <p class="private-dinners-text">
@@ -1350,20 +1416,20 @@
         </p>
         <a href="#contact" class="btn-light" style="align-self:flex-start;">Solicită o rezervare &nbsp;→</a>
       </div>
-      <div class="private-dinners-photo">
+      <div class="private-dinners-photo" data-anim="scale">
         <img src="dinner.webp" alt="Private Dinner" />
       </div>
     </section>
 
     <!-- ── SERVICII ─────────────────────────────────── -->
     <section class="servicii">
-      <h2 class="servicii-title">Serviciile noastre</h2>
-      <p class="servicii-subtitle">La Maya Villas găsești mai mult decât un loc de odihnă, un spațiu pentru fiecare moment important din viața ta.</p>
+      <h2 class="servicii-title" data-anim="up">Serviciile noastre</h2>
+      <p class="servicii-subtitle" data-anim="up" data-delay="100">La Maya Villas găsești mai mult decât un loc de odihnă, un spațiu pentru fiecare moment important din viața ta.</p>
 
       <div class="servicii-grid">
 
         <!-- Cazare -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="0" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 32V22a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v10"/>
@@ -1377,7 +1443,7 @@
         </div>
 
         <!-- Terasă -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="100" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M8 20h32"/>
@@ -1391,7 +1457,7 @@
         </div>
 
         <!-- Lac natural -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="200" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 18c3-5 6-5 9 0s6 5 9 0 6-5 9 0 6 5 9 0"/>
@@ -1403,7 +1469,7 @@
         </div>
 
         <!-- Bar privat -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="300" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 10h12l-3 12H21z"/>
@@ -1416,7 +1482,7 @@
         </div>
 
         <!-- Evenimente -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="0" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M24 8l3.5 9.5H38l-8.5 6 3.5 9.5L24 28l-9 5 3.5-9.5L10 17.5h10.5z"/>
@@ -1426,7 +1492,7 @@
         </div>
 
         <!-- Vacanțe -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="100" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="24" cy="20" r="8"/>
@@ -1438,7 +1504,7 @@
         </div>
 
         <!-- Conferințe -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="200" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <rect x="8" y="18" width="32" height="16" rx="2"/>
@@ -1451,7 +1517,7 @@
         </div>
 
         <!-- Celebrating life -->
-        <div class="serviciu-item">
+        <div class="serviciu-item" data-anim="up" data-delay="">
           <div class="serviciu-icon">
             <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 38l4-28 4 28"/>
@@ -1471,7 +1537,7 @@
     <section class="contact">
 
       <!-- stânga: detalii -->
-      <div class="contact-info">
+      <div class="contact-info" data-anim="left">
         <h2 class="contact-title">Contact.</h2>
 
         <div class="contact-rows">
@@ -1545,7 +1611,7 @@
       </div>
 
       <!-- dreapta: harta -->
-      <div class="contact-map">
+      <div class="contact-map" data-anim="right">
         <iframe
           src="https://maps.google.com/maps?q=Gagarin+50+Curchi+Moldova+3524&output=embed&hl=ro"
           allowfullscreen
@@ -1559,7 +1625,7 @@
     <!-- ── TAGLINE CTA ─────────────────────────────── -->
     <section class="tagline-section">
       <img class="tagline-bg" src="hero4.webp" alt="Maya Villas" />
-      <div class="tagline-content">
+      <div class="tagline-content" data-anim="up">
         <p class="tagline-label">Maya Villas on Lake — Curchi, Moldova</p>
         <h2 class="tagline-heading">Mai mult decât<br>o destinație.</h2>
         <p class="tagline-sub">Este o experiență.</p>
@@ -1597,6 +1663,19 @@
         document.body.style.overflow = '';
       });
     });
+
+    // Scroll animations
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay || 0);
+        setTimeout(() => el.classList.add('in-view'), delay);
+        animObserver.unobserve(el);
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
   </script>
 </body>
 </html>
