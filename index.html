@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAYA Villas on Lake — Moldova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      background: #000;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      gap: 32px;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10,9,8,.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .navbar-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      flex: 1;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .navbar-links a:hover { color: #fff; }
+
+    .navbar-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 20px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 100px;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .navbar-cta:hover {
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.65);
+    }
+
+    /* ════════════════════════════════════════════════
+       HERO — normal flow, scrolls away naturally
+    ════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        160deg,
+        rgba(0,0,0,.70) 0%,
+        rgba(0,0,0,.32) 35%,
+        rgba(0,0,0,.25) 55%,
+        rgba(0,0,0,.72) 100%
+      );
+    }
+
+    .hero > *:not(.hero-bg) {
+      position: absolute;
+      z-index: 2;
+    }
+
+    .hero .desc {
+      max-width: clamp(280px, 30vw, 460px);
+    }
+
+    .coords {
+      top: 38px;
+      left: 48px;
+      font-size: 11.5px;
+      font-weight: 300;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+      line-height: 1.65;
+    }
+
+    .title-wrap {
+      top: 22vh;
+      right: 80px;
+    }
+
+    .villa-name {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: clamp(80px, 13vw, 180px);
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      color: #fff;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .villa-sub {
+      display: block;
+      font-size: clamp(22px, 3.2vw, 46px);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: lowercase;
+      color: rgba(255,255,255,.82);
+      margin-top: 6px;
+    }
+
+    .credit {
+      bottom: 42px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .credit-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.40);
+      background: rgba(255,255,255,.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      color: rgba(255,255,255,.85);
+    }
+
+    .credit-label {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.62);
+      line-height: 1.7;
+    }
+
+    .desc {
+      bottom: 42px;
+      right: 80px;
+      max-width: clamp(280px, 30vw, 460px);
+      text-align: left;
+    }
+
+    .desc p {
+      font-size: 21px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,.88);
+    }
+
+    .page-content {
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: ABOUT
+    ════════════════════════════════════════════════ */
+    .about {
+      background: #f0ede6;
+      display: flex;
+      min-height: 100vh;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .about-photo {
+      width: 44%;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .about-body {
+      flex: 1;
+      padding: 80px 72px 80px 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .about-group {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8a8070;
+    }
+
+    .about-heading {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: clamp(16px, 1.6vw, 22px);
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      color: #1c1917;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stat-pill {
+      padding: 8px 16px;
+      border: 1px solid #c8c0b4;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #5a5249;
+      background: transparent;
+    }
+
+    .about-location {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: #9a9080;
+      text-transform: uppercase;
+    }
+
+    .about-location span {
+      color: #5a5249;
+    }
+
+    .about-distance {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .distance-km {
+      font-family: 'Raleway', sans-serif;
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1;
+      color: #1c1917;
+    }
+
+    .distance-label {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #7a7268;
+    }
+
+    .about-text {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.78;
+      color: #8a8070;
+      max-width: 420px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: #1c1917;
+      color: #f0ede6;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: background 0.25s ease, color 0.25s ease;
+      align-self: flex-start;
+    }
+
+    .btn-primary:hover {
+      background: #3a3530;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: CAZARE
+    ════════════════════════════════════════════════ */
+    .cazare {
+      background: #f8f5f0;
+      padding: 100px 64px 110px;
+      overflow: hidden;
+    }
+
+    .cazare-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      gap: 40px;
+    }
+
+    .cazare-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: clamp(44px, 7vw, 96px);
+      line-height: 0.92;
+      color: #1c1917;
+    }
+
+    .cazare-desc {
+      max-width: 340px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #6a6058;
+      text-align: right;
+    }
+
+    /* ── staggered two-photo layout ── */
+    .cazare-stagger {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+
+    /* left col: text at top, photo lower */
+    .cazare-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .cazare-left-text {
+      padding: 28px 0 0;
+    }
+
+    .cazare-left-text h3 {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      color: #1c1917;
+      margin-bottom: 10px;
+    }
+
+    .cazare-left-text p {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #6a6058;
+      max-width: 340px;
+    }
+
+    .cazare-photo-2 {
+      margin-top: 0;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .cazare-photo-2 img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+    }
+
+    .cazare-photo-2:hover img { transform: scale(1.03); }
+
+    .cazare-photo-label {
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9a9080;
+    }
+
+    /* right col: tall photo starts at top */
+    .cazare-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cazare-photo-1 {
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .cazare-photo-1 img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+    }
+
+    .cazare-photo-1:hover img { transform: scale(1.03); }
+
+    /* ── rând extra jos ── */
+    .cazare-extra {
+      display: grid;
+      grid-template-columns: 1fr 0.65fr;
+      gap: 48px;
+      margin-top: 48px;
+      align-items: start;
+    }
+
+    .cazare-extra-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cazare-extra-item .cazare-extra-img {
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    /* dormitor */
+    .cazare-extra-item--tall .cazare-extra-img img {
+      aspect-ratio: 1/1;
+      object-position: center 60%;
+    }
+
+    /* secundare — stacked */
+    .cazare-extra-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cazare-extra-item img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+      aspect-ratio: 3/2;
+    }
+
+    .cazare-extra-item:hover img { transform: scale(1.03); }
+
+    /* villa info block */
+    .villa-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 8px 0 0 8px;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .villa-info-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 300;
+      color: #1c1917;
+      letter-spacing: -0.01em;
+    }
+
+    .villa-info-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid #d8d3ca;
+    }
+
+    .villa-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid #d8d3ca;
+      gap: 16px;
+    }
+
+    .villa-info-key {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #8a8070;
+    }
+
+    .villa-info-val {
+      font-size: 14px;
+      font-weight: 300;
+      color: #1c1917;
+      text-align: right;
+    }
+
+    .villa-info-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .villa-info-price small {
+      font-size: 14px;
+      font-weight: 300;
+      color: #8a8070;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: PRIVATE DINNERS
+    ════════════════════════════════════════════════ */
+    .private-dinners {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      background: #1c1917;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .private-dinners-bg {
+      display: none; /* not used — photo is in grid */
+    }
+
+    .private-dinners-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      padding: 80px 64px;
+      color: #fff;
+    }
+
+    .private-dinners-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: clamp(52px, 6vw, 96px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .private-dinners-text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.72;
+      color: rgba(255,255,255,.70);
+      max-width: 380px;
+    }
+
+    .private-dinners-photo {
+      overflow: hidden;
+    }
+
+    .private-dinners-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: SERVICII
+    ════════════════════════════════════════════════ */
+    .servicii {
+      background: #faf9f6;
+      padding: 100px 64px 110px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .servicii-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: clamp(28px, 3.5vw, 46px);
+      color: #1c1917;
+      margin-bottom: 18px;
+    }
+
+    .servicii-subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #7a7268;
+      max-width: 480px;
+      margin: 0 auto 72px;
+    }
+
+    .servicii-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      row-gap: 56px;
+      column-gap: 24px;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .serviciu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .serviciu-icon {
+      width: 48px;
+      height: 48px;
+      color: #3a3530;
+    }
+
+    .serviciu-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .serviciu-name {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: #4a4540;
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: TAGLINE / CTA
+    ════════════════════════════════════════════════ */
+    .tagline-section {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 64px;
+      overflow: hidden;
+      background: #1c1917;
+    }
+
+    .tagline-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      opacity: 0.35;
+    }
+
+    .tagline-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tagline-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 28px;
+    }
+
+    .tagline-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(44px, 7vw, 100px);
+      line-height: 1.0;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .tagline-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 48px;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,.4);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .btn-light:hover {
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.7);
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION: CONTACT
+    ════════════════════════════════════════════════ */
+    .contact {
+      background: #f0ede6;
+      padding: 100px 64px 110px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+      overflow: hidden;
+    }
+
+    .contact-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 0.92;
+      color: #1c1917;
+      margin-bottom: 48px;
+    }
+
+    .contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-left: 32px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-row-icon {
+      width: 20px;
+      height: 20px;
+      color: #8a8070;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .contact-row-icon svg { width: 100%; height: 100%; }
+
+    .contact-row-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9a9080;
+      margin-bottom: 4px;
+    }
+
+    .contact-row-value {
+      font-size: 15px;
+      font-weight: 300;
+      color: #1c1917;
+      line-height: 1.55;
+      text-decoration: none;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    a.contact-row-value:hover { color: #5a5249; }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #1c1917;
+      color: #f0ede6;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .contact-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6dbf67;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    .contact-map {
+      height: 460px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,.10);
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════ */
+    footer {
+      background: #141210;
+      padding: 40px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.10em;
+      color: rgba(255,255,255,.25);
+    }
+
+    /* ════════════════════════════════════════════════
+       HAMBURGER MENU
+    ════════════════════════════════════════════════ */
+    .navbar-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 110;
+    }
+
+    .navbar-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .navbar-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .navbar-hamburger.open span:nth-child(2) { opacity: 0; }
+    .navbar-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(10,9,8,.97);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Raleway', sans-serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.80);
+      text-decoration: none;
+    }
+
+    .mobile-menu a:hover { color: #fff; }
+
+    .mobile-menu .mobile-cta {
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      padding: 12px 28px;
+      border: 1px solid rgba(255,255,255,.4);
+      border-radius: 100px;
+      color: #fff;
+    }
+
+    /* ════════════════════════════════════════════════
+       RESPONSIVE — TABLET (≤ 1024px)
+    ════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .about-photo { width: 38%; }
+      .about-body { padding: 60px 48px 60px 48px; }
+
+      .cazare { padding: 80px 40px 90px; }
+
+      .private-dinners-content { padding: 60px 48px; }
+
+      .servicii { padding: 80px 40px 90px; }
+      .servicii-grid { grid-template-columns: repeat(4, 1fr); }
+
+      .contact { padding: 80px 40px 90px; gap: 48px; }
+
+      footer { padding: 32px 40px; }
+    }
+
+    /* ════════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤ 768px)
+    ════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* Navbar */
+      .navbar {
+        padding: 18px 24px;
+      }
+
+      .navbar-links,
+      .navbar-cta {
+        display: none;
+      }
+
+      .navbar-hamburger {
+        display: flex;
+      }
+
+      /* Hero */
+      .coords {
+        top: 72px;
+        left: 20px;
+        font-size: 10px;
+      }
+
+      .title-wrap {
+        top: auto;
+        bottom: 270px;
+        left: 20px;
+        right: auto;
+        max-width: 85vw;
+      }
+
+      .villa-name {
+        font-size: clamp(132px, 37vw, 190px);
+        white-space: normal;
+        text-align: left;
+      }
+
+      .villa-sub {
+        font-size: clamp(16px, 4.5vw, 22px);
+      }
+
+      .credit {
+        bottom: 16px;
+        left: 20px;
+      }
+
+      .desc {
+        display: block;
+        bottom: 120px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+      }
+
+      .desc p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255,255,255,.78);
+        text-align: left;
+      }
+
+      /* About */
+      .about {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .about-photo {
+        width: 100%;
+        height: 55vw;
+        min-height: 240px;
+        order: 2;
+      }
+
+      .about-body {
+        padding: 80px 24px 80px;
+        gap: 24px;
+        order: 1;
+      }
+
+      /* Cazare */
+      .cazare {
+        padding: 64px 24px 72px;
+      }
+
+      .cazare-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 28px;
+        gap: 40px;
+      }
+
+      .cazare-desc {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      .cazare-stagger {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .cazare-photo-2 { margin-top: 28px; }
+
+      .cazare-extra {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .villa-info { padding: 0; }
+
+      .cazare-extra-item--tall .cazare-extra-img img {
+        object-position: center 75%;
+      }
+
+      /* Private Dinners */
+      .private-dinners {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .private-dinners-content {
+        padding: 96px 24px;
+        order: 2;
+      }
+
+      .private-dinners-photo {
+        order: 1;
+        height: 90vw;
+        min-height: 340px;
+      }
+
+      .private-dinners-photo img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Servicii */
+      .servicii {
+        padding: 64px 24px 72px;
+      }
+
+      .servicii-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 44px;
+        column-gap: 16px;
+      }
+
+      /* Tagline */
+      .tagline-section {
+        padding: 80px 24px;
+        min-height: 70vh;
+      }
+
+      /* Contact */
+      .contact {
+        grid-template-columns: 1fr;
+        padding: 64px 24px 72px;
+        gap: 48px;
+      }
+
+      .contact-rows { padding-left: 0; }
+
+      .contact-map {
+        height: 300px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 32px 24px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ════════════════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE (≤ 400px)
+    ════════════════════════════════════════════════ */
+    @media (max-width: 400px) {
+      .villa-name { font-size: 56px; }
+      .servicii-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="navbar-logo">MAYA</a>
+    <ul class="navbar-links">
+      <li><a href="#cazare">Cazare</a></li>
+      <li><a href="#dinners">Private Dinners</a></li>
+      <li><a href="#servicii">Servicii</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="navbar-cta">Rezervă</a>
+    <button class="navbar-hamburger" id="hamburger" aria-label="Meniu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ════════ MOBILE MENU ════════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#cazare" class="mobile-link">Cazare</a>
+    <a href="#dinners" class="mobile-link">Private Dinners</a>
+    <a href="#servicii" class="mobile-link">Servicii</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#contact" class="mobile-cta mobile-link">Rezervă</a>
+  </div>
+
+  <!-- ════════ HERO (fixed) ════════ -->
+  <div class="hero">
+    <img class="hero-bg" src="hero2.jpg" alt="MAYA Villas on Lake" />
+
+
+    <div class="title-wrap">
+      <h1 class="villa-name">MAYA<br><span class="villa-sub">villas on lake</span></h1>
+    </div>
+
+    <div class="credit">
+      <div class="credit-label" style="font-size:11px; letter-spacing:0.14em; color:rgba(255,255,255,.68);">Curchi, Moldova</div>
+    </div>
+
+    <div class="desc">
+      <p>un resort retras pe malul lacului, înconjurat de pădure și natură vie, ferestre panoramice, piatră naturală, un orizont care nu se termină niciodată</p>
+    </div>
+  </div>
+
+  <!-- ════════ SCROLL CONTENT ════════ -->
+  <div class="page-content">
+
+    <!-- ── ABOUT ───────────────────────────────────── -->
+    <section class="about">
+      <div class="about-photo">
+        <img src="hero4.jpg" alt="Maya Villas" />
+      </div>
+      <div class="about-body">
+        <span class="section-label">Despre Noi</span>
+
+        <div class="about-group">
+          <h2 class="about-heading">
+            Vile private complet echipate, terase exterioare, living cu bar și vedere directă spre lac. Disponibile pentru sejururi private, team building-uri, conferințe, nunți și orice moment care merită să fie sărbătorit.
+          </h2>
+
+          <div class="about-stats">
+            <span class="stat-pill">3 Vile Private</span>
+            <span class="stat-pill">Lac Natural</span>
+            <span class="stat-pill">Natură Neatinsă</span>
+            <span class="stat-pill">Vedere Panoramică</span>
+          </div>
+
+          <div class="about-location">
+            [Locația Noastră &nbsp;/&nbsp; <span>Curchi, Moldova</span>]
+          </div>
+        </div>
+
+        <a href="#" class="btn-primary">Rezervă acum &nbsp;→</a>
+      </div>
+    </section>
+
+    <!-- ── CAZARE ───────────────────────────────────── -->
+    <section class="cazare">
+      <div class="cazare-header">
+        <h2 class="cazare-title">Cazare.</h2>
+        <p class="cazare-desc">
+          Vile construite din piatră locală și lemn masiv, cu ferestre largi spre lac și pădure. Fiecare spațiu e gândit pentru confort autentic și liniște deplină.
+        </p>
+      </div>
+
+      <div class="cazare-stagger">
+
+        <!-- stânga: poză sus, text jos -->
+        <div class="cazare-left">
+          <div class="cazare-photo-2">
+            <img src="terrace.jpg" alt="Terasă privată" />
+          </div>
+          <span class="cazare-photo-label">Terasă privată</span>
+          <div class="cazare-left-text">
+            <h3>Spații gândite pentru confort autentic</h3>
+            <p>Fiecare vilă include dormitor cu vedere la lac, living cu bar privat, baie din travertin natural și terasă privată cu masă exterioară. Piatră locală, lemn masiv, lumină naturală.</p>
+          </div>
+        </div>
+
+        <!-- dreapta: poză înaltă sus -->
+        <div class="cazare-right">
+          <div class="cazare-photo-1">
+            <img src="view_from_room.jpg" alt="Dormitor cu vedere la lac" />
+          </div>
+          <span class="cazare-photo-label" style="margin-top:14px;">Dormitor · vedere la lac</span>
+        </div>
+
+      </div>
+
+      <!-- rând suplimentar jos -->
+      <div class="cazare-extra">
+
+        <!-- dormitor — înalt -->
+        <div class="cazare-extra-item cazare-extra-item--tall">
+          <div class="cazare-extra-img">
+            <img src="room%20copy.jpg" alt="Dormitor" />
+          </div>
+          <span class="cazare-photo-label">Dormitor · King Size Bed</span>
+        </div>
+
+        <!-- dreapta: info vilă -->
+        <div class="villa-info">
+          <span class="villa-info-label">Vilele noastre</span>
+
+          <div class="villa-info-rows">
+            <div class="villa-info-row">
+              <span class="villa-info-key">Check-in</span>
+              <span class="villa-info-val">12:00</span>
+            </div>
+            <div class="villa-info-row">
+              <span class="villa-info-key">Check-out</span>
+              <span class="villa-info-val">15:00</span>
+            </div>
+            <div class="villa-info-row">
+              <span class="villa-info-key">Număr oaspeți</span>
+              <span class="villa-info-val">până la 3 persoane</span>
+            </div>
+            <div class="villa-info-row">
+              <span class="villa-info-key">Preț</span>
+              <span class="villa-info-val villa-info-price">3 000 MDL <small>/ noapte</small></span>
+            </div>
+          </div>
+
+          <a href="#" class="btn-primary">Rezervă acum &nbsp;→</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ── PRIVATE DINNERS ───────────────────────────── -->
+    <section class="private-dinners" id="dinners">
+      <div class="private-dinners-content">
+        <span class="section-label" style="color:rgba(255,255,255,.45); margin-bottom:8px;">Experiențe exclusive</span>
+        <h2 class="private-dinners-title">Private<br>Dinners.</h2>
+        <p class="private-dinners-text">
+          O cină privată în aer liber, la malul lacului, cu o masă aranjată special pentru tine. Meniu personalizat, atmosferă intimă, lumânări și natură — o experiență care nu se uită.
+        </p>
+        <a href="#contact" class="btn-light" style="align-self:flex-start;">Solicită o rezervare &nbsp;→</a>
+      </div>
+      <div class="private-dinners-photo">
+        <img src="dinner.jpg" alt="Private Dinner" />
+      </div>
+    </section>
+
+    <!-- ── SERVICII ─────────────────────────────────── -->
+    <section class="servicii">
+      <h2 class="servicii-title">Serviciile noastre</h2>
+      <p class="servicii-subtitle">La Maya Villas găsești mai mult decât un loc de odihnă, un spațiu pentru fiecare moment important din viața ta.</p>
+
+      <div class="servicii-grid">
+
+        <!-- Cazare -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 32V22a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v10"/>
+              <rect x="4" y="32" width="40" height="5" rx="1"/>
+              <path d="M8 37v3M40 37v3"/>
+              <rect x="13" y="23" width="8" height="5" rx="1"/>
+              <rect x="27" y="23" width="8" height="5" rx="1"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Cazare</span>
+        </div>
+
+        <!-- Terasă -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 20h32"/>
+              <path d="M12 20v14M36 20v14"/>
+              <path d="M8 34h32"/>
+              <path d="M9 20C9 14 24 10 24 10s15 4 15 10"/>
+              <path d="M18 20v14M30 20v14"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Terasă privată</span>
+        </div>
+
+        <!-- Lac natural -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 18c3-5 6-5 9 0s6 5 9 0 6-5 9 0 6 5 9 0"/>
+              <path d="M6 26c3-5 6-5 9 0s6 5 9 0 6-5 9 0 6 5 9 0"/>
+              <path d="M6 34c3-5 6-5 9 0s6 5 9 0 6-5 9 0 6 5 9 0"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Lac natural</span>
+        </div>
+
+        <!-- Bar privat -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 10h12l-3 12H21z"/>
+              <path d="M24 22v12"/>
+              <path d="M16 34h16"/>
+              <path d="M30 16h6l-4 8"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Bar privat</span>
+        </div>
+
+        <!-- Evenimente -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M24 8l3.5 9.5H38l-8.5 6 3.5 9.5L24 28l-9 5 3.5-9.5L10 17.5h10.5z"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Evenimente</span>
+        </div>
+
+        <!-- Vacanțe -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="20" r="8"/>
+              <path d="M24 8v3M24 29v3M10 20h3M35 20h3M13.9 12.9l2 2M32.1 31.1l2 2M13.9 27.1l2-2M32.1 12.9l2-2"/>
+              <path d="M10 38h28"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Vacanțe</span>
+        </div>
+
+        <!-- Conferințe -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="18" width="32" height="16" rx="2"/>
+              <path d="M16 18v-4M32 18v-4"/>
+              <path d="M16 34v4M32 34v4"/>
+              <circle cx="24" cy="11" r="3"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Conferințe</span>
+        </div>
+
+        <!-- Celebrating life -->
+        <div class="serviciu-item">
+          <div class="serviciu-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 38l4-28 4 28"/>
+              <path d="M14 16c0-6 10-8 10-8s10 2 10 8c0 4-4 6-10 6s-10-2-10-6z"/>
+              <path d="M24 22v10"/>
+              <path d="M16 38h16"/>
+              <path d="M12 10l2 2M36 10l-2 2M12 8l1 3M36 8l-1 3"/>
+            </svg>
+          </div>
+          <span class="serviciu-name">Celebrating life</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CONTACT ───────────────────────────────────── -->
+    <section class="contact">
+
+      <!-- stânga: detalii -->
+      <div class="contact-info">
+        <h2 class="contact-title">Contact.</h2>
+
+        <div class="contact-rows">
+
+          <div class="contact-row">
+            <div class="contact-row-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-row-label">Adresă</p>
+              <span class="contact-row-value">Gagarin 50, Curchi<br>Moldova, 3524</span>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-row-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.48v1.44z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-row-label">Telefon</p>
+              <a href="tel:+373683763190" class="contact-row-value">+373 683 76 319</a>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-row-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-row-label">Email</p>
+              <a href="mailto:maya.secretvillas@gmail.com" class="contact-row-value">maya.secretvillas@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-row-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-row-label">Instagram · Website</p>
+              <span class="contact-row-value">@Maya_secret_garden · maya.villas</span>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="contact-row-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+            </div>
+            <div>
+              <p class="contact-row-label">Program</p>
+              <span class="contact-row-value">Non-stop · 24/7</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- dreapta: harta -->
+      <div class="contact-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Gagarin+50+Curchi+Moldova+3524&output=embed&hl=ro"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </section>
+
+    <!-- ── TAGLINE CTA ─────────────────────────────── -->
+    <section class="tagline-section">
+      <img class="tagline-bg" src="hero4.jpg" alt="Maya Villas" />
+      <div class="tagline-content">
+        <p class="tagline-label">Maya Villas on Lake — Curchi, Moldova</p>
+        <h2 class="tagline-heading">Mai mult decât<br>o destinație.</h2>
+        <p class="tagline-sub">Este o experiență.</p>
+        <a href="#" class="btn-light">Rezervă sejurul tău &nbsp;→</a>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ──────────────────────────────────── -->
+    <footer>
+      <span class="footer-logo">Maya Villas on Lake</span>
+      <span class="footer-copy">© 2026 Maya Villas. Curchi, Moldova.</span>
+    </footer>
+
+  </div><!-- end .page-content -->
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>
